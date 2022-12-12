@@ -6,14 +6,16 @@
 //
 
 #include <stdio.h>
+#include "test.hpp"
 #include "reader.hpp"
 #include "board.hpp"
 #include "element.hpp"
 #include "square.hpp"
 
 int test() {
-    Reader r("sudoku.txt");
+    Reader r("sudoku_small.txt");
     Board* b = r.nextBoard();
+    b->printBoard();
     
     return 0;
 }

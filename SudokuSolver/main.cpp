@@ -6,7 +6,7 @@
 //
 
 #include <iostream>
-#include "test.cpp"
+#include "test.hpp"
 
 int main(int argc, const char * argv[]) {
     test();

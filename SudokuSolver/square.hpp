@@ -17,7 +17,8 @@ class Square {
 public:
     Square(int num);
     ~Square();
-    void addElement(Element);
+    void addElement(Element e);
+    int getNumber();
 private:
     int num;
     std::vector<Element> elements;

@@ -15,48 +15,43 @@
 #include "board.hpp"
 
 Reader::Reader(std::string filename) {
-    this->file = new std::ifstream(filename, std::ifstream::in);
+    this->filename = filename;
     this->lines = new std::vector<std::string>();
     this->load();
 }
 
 void Reader::load() {
     std::string line;
-    while (std::getline(*this->file, line)) {
+    std::ifstream file = std::ifstream(this->filename, std::ifstream::in);
+    if (!file) {
+        std::cerr << "Unable to find file." << std::endl;
+    }
+    while (std::getline(file, line)) {
+        std::cout << line << std::endl;
         this->lines->push_back(line);
     }
+    file.close();
 }
 
 Board* Reader::buildBoard(std::string flatboard) {
-    Square*** board = new Square**[9];
+    Square*** squares = new Square**[9];
     int symNum = 0;
     for (int i = 0; i < 9; i++) {
-        board[i] = new Square*[9];
+        squares[i] = new Square*[9];
     }
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            board[i][j] = new Square(flatboard[symNum] - '0');
+            squares[i][j] = new Square(flatboard[symNum] - '0');
             symNum++;
         }
     }
-    Board* finished = new Board(board);
-    
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            std::cout << board[i][j];
-        }
-        std::cout << std::endl;
-    }
-    
-    return finished;
+    return new Board(squares);
 }
 
-Board* Reader::nextBoard() {
-    this->currentLine++;
-    
-    return nullptr;
+Board* Reader::nextBoard() {    
+    return this->buildBoard(this->lines->at(this->currentLine++));
 }
 
 Reader::~Reader() {
-    
+    delete this->lines;
 }

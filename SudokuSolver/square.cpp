@@ -15,3 +15,12 @@ Square::Square(int num) {
 Square::~Square() {
     
 }
+
+void Square::addElement(Element e) {
+    return;
+}
+
+int Square::getNumber()
+{
+    return this->num;
+}

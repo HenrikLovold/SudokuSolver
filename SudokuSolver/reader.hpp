@@ -22,8 +22,8 @@ public:
     Board* nextBoard();
 private:
     int currentLine = 0;
+    std::string filename;
     std::vector<std::string>* lines;
-    std::ifstream* file;
     void load();
     Board* buildBoard(std::string flatboard);
 };
