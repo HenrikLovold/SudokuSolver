@@ -8,7 +8,12 @@
 #pragma once
 
 #include <stdio.h>
+#include "square.hpp"
 
 class Element {
-    
+public:
+    Element(Square** squares);
+    ~Element();
+private:
+    Square** squares;
 };

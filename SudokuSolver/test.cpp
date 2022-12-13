@@ -13,9 +13,12 @@
 #include "square.hpp"
 
 int test() {
-    Reader r("sudoku_small.txt");
+    Reader r("sudoku.txt");
     Board* b = r.nextBoard();
     b->printBoard();
+
+    std::cout << "Program finished, hit enter to exit." << std::endl;
+    std::cin.get();
     
     return 0;
 }

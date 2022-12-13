@@ -26,9 +26,13 @@ void Reader::load() {
     if (!file) {
         std::cerr << "Unable to find file." << std::endl;
     }
-    while (std::getline(file, line)) {
-        std::cout << line << std::endl;
-        this->lines->push_back(line);
+    try {
+        while (std::getline(file, line)) {
+            this->lines->push_back(line);
+        }
+    }
+    catch (std::out_of_range){
+        std::cerr << "Memory error in load, the file probably couldn't be read";
     }
     file.close();
 }
@@ -48,8 +52,19 @@ Board* Reader::buildBoard(std::string flatboard) {
     return new Board(squares);
 }
 
-Board* Reader::nextBoard() {    
-    return this->buildBoard(this->lines->at(this->currentLine++));
+Board* Reader::nextBoard() {
+    try {
+        if (this->currentLine < this->lines->size()) {
+            return this->buildBoard(this->lines->at(this->currentLine++));
+        }
+        return nullptr;
+    }
+    catch (std::out_of_range) {
+        std::cerr << "Could not fetch next board and got an std::out_of_range exception." << std::endl;
+        std::cerr << "Press enter to exit (code will be 1)." << std::endl;
+        std::cin.get();
+        exit(1);
+    }
 }
 
 Reader::~Reader() {

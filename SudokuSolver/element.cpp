@@ -6,3 +6,14 @@
 //
 
 #include "element.hpp"
+#include "square.hpp"
+#include <iostream>
+#include <string>
+
+Element::Element(Square** squares) {
+	this->squares = squares;
+}
+
+Element::~Element() {
+
+}

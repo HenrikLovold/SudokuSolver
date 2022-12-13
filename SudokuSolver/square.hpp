@@ -11,7 +11,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "element.hpp"
+
+class Element;
 
 class Square {
 public:
@@ -21,5 +22,5 @@ public:
     int getNumber();
 private:
     int num;
-    std::vector<Element> elements;
+    std::vector<Element>* elements;
 };
