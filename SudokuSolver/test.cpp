@@ -18,7 +18,7 @@ int test() {
     b->printBoard();
     b->getSquareAt(0, 0)->printInfo();
 
-    std::cout << "Program finished, hit enter to exit." << std::endl;
+    std::cout << "Program finished, press enter to exit." << std::endl;
     std::cin.get();
     
     return 0;

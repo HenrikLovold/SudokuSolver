@@ -31,6 +31,5 @@ int Square::getNumber() {
 void Square::printInfo() {
     std::cout << "Square with number: " << this->num << std::endl;
     std::string s;
-    std::cin
-    this->elements[0][0].printValues();
+    this->elements[0][2].printValues();
 }

@@ -61,18 +61,16 @@ void Board::generateElements() {
     delete currRow;
     delete currCol;
     std::cout << "finished rows and columns" << std::endl;
-    /*for (int offsetX = 0; offsetX < 9; offsetX += 3) {
+    for (int offsetX = 0; offsetX < 9; offsetX += 3) {
         for (int offsetY = 0; offsetY < 9; offsetY += 3) {
             Square** box = new Square*[9];
-            cnt = 0;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    box[cnt] = this->squares[i + offsetX][j + offsetY];
+                    box[(i*3) + j] = this->squares[i + offsetX][j + offsetY];
                 }
             }
             this->elements->push_back(Element(box));
-            delete box;
         }
-    }*/
+    }
 
 }
