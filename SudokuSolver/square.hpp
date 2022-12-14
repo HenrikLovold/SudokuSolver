@@ -20,6 +20,7 @@ public:
     ~Square();
     void addElement(Element e);
     int getNumber();
+    void printInfo();
 private:
     int num;
     std::vector<Element>* elements;

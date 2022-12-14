@@ -14,6 +14,9 @@ class Element {
 public:
     Element(Square** squares);
     ~Element();
+    Square** getSquares();
+    void printValues();
 private:
     Square** squares;
+    void setSquareOwnership();
 };

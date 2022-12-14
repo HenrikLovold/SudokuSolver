@@ -10,10 +10,12 @@
 #include <iostream>
 #include <vector>
 #include "element.hpp"
+#include "square.hpp"
 
 Board::Board(Square*** squares) {
     this->squares = squares;
     this->elements = new std::vector<Element>();
+    this->generateElements();
 }
 
 Board::~Board() {
@@ -36,6 +38,41 @@ void Board::printBoard() {
     }
 }
 
+Square* Board::getSquareAt(int x, int y) {
+    return this->squares[x][y];
+}
+
 void Board::generateElements() {
+    Square** currRow = new Square*[9];
+    Square** currCol = new Square*[9];
+    unsigned int cnt = 0;
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            currRow[cnt] = this->squares[i][j];
+            currCol[cnt] = this->squares[j][i];
+            cnt++;
+        }
+        this->elements->push_back(Element(currRow));
+        this->elements->push_back(Element(currCol));
+        currRow = new Square*[9];
+        currCol = new Square*[9];
+        cnt = 0;
+    }
+    delete currRow;
+    delete currCol;
+    std::cout << "finished rows and columns" << std::endl;
+    /*for (int offsetX = 0; offsetX < 9; offsetX += 3) {
+        for (int offsetY = 0; offsetY < 9; offsetY += 3) {
+            Square** box = new Square*[9];
+            cnt = 0;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    box[cnt] = this->squares[i + offsetX][j + offsetY];
+                }
+            }
+            this->elements->push_back(Element(box));
+            delete box;
+        }
+    }*/
 
 }
