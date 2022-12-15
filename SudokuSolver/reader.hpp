@@ -20,6 +20,7 @@ public:
     Reader(std::string filename);
     ~Reader();
     Board* nextBoard();
+    bool hasNext();
 private:
     int currentLine = 0;
     std::string filename;

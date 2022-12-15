@@ -8,9 +8,22 @@
 #pragma once
 
 #include <stdio.h>
+#include <string>
+#include <vector>
+#include "reader.hpp"
+#include "board.hpp"
 
 class Solver {
 public:
-    Solver();
+    Solver(std::string filename);
     ~Solver();
+    void solveNext();
+    bool hasUnsolvedBoards();
+private:
+    Reader* reader;
+    std::vector<Board*>* boards;
+    std::vector<Board*>* solved;
+    int currentBoardNumber;
+    
+    void loadBoards();
 };

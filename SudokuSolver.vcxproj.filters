@@ -51,4 +51,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Debug\sudoku_2k.txt" />
+    <Text Include="sudoku_2k.txt" />
+  </ItemGroup>
 </Project>

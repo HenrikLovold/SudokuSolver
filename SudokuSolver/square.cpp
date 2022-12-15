@@ -17,7 +17,7 @@ Square::Square(int num) {
 }
 
 Square::~Square() {
-    
+    delete this->elements;
 }
 
 void Square::addElement(Element e) {
@@ -26,6 +26,19 @@ void Square::addElement(Element e) {
 
 int Square::getNumber() {
     return this->num;
+}
+
+void Square::setNumber(int num) {
+    this->num = num;
+}
+
+bool Square::checkValid(int num) {
+    for (int i = 0; i < this->elements->size(); i++) {
+        if (!this->elements->at(i).checkValid(num)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Square::printInfo() {

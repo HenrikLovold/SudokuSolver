@@ -112,6 +112,10 @@
     <ClInclude Include="sudokusolver\solver.hpp" />
     <ClInclude Include="sudokusolver\square.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Debug\sudoku_2k.txt" />
+    <Text Include="sudoku_2k.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

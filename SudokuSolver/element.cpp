@@ -29,8 +29,16 @@ void Element::printValues() {
 	}
 }
 
+bool Element::checkValid(int num) {
+	for (int i = 0; i < 9; i++) {
+		if (this->squares[i]->getNumber() == num) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void Element::setSquareOwnership() {
-	std::cout << "adding element" << std::endl;
 	for (int i = 0; i < 9; i++) {
 		this->squares[i]->addElement(*this);
 	}

@@ -20,6 +20,8 @@ public:
     ~Square();
     void addElement(Element e);
     int getNumber();
+    void setNumber(int num);
+    bool checkValid(int num);
     void printInfo();
 private:
     int num;

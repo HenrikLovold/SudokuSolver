@@ -16,6 +16,7 @@ public:
     ~Element();
     Square** getSquares();
     void printValues();
+    bool checkValid(int num);
 private:
     Square** squares;
     void setSquareOwnership();

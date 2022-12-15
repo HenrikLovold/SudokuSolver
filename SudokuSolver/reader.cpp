@@ -33,23 +33,39 @@ void Reader::load() {
     }
     catch (std::out_of_range){
         std::cerr << "Memory error in load, the file probably couldn't be read";
+        exit(3);
     }
+    std::cout << "Finished loading file data, " << this->lines->size() << " lines..." << std::endl;
     file.close();
 }
 
 Board* Reader::buildBoard(std::string flatboard) {
-    Square*** squares = new Square**[9];
-    int symNum = 0;
-    for (int i = 0; i < 9; i++) {
-        squares[i] = new Square*[9];
-    }
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            squares[i][j] = new Square(flatboard[symNum] - '0');
-            symNum++;
+    try {
+        Square*** squares = new Square * *[9];
+        int symNum = 0;
+        for (int i = 0; i < 9; i++) {
+            squares[i] = new Square * [9];
         }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                squares[i][j] = new Square(flatboard[symNum] - '0');
+                symNum++;
+            }
+        }
+        return new Board(squares, (unsigned int)this->currentLine - 1);
     }
-    return new Board(squares);
+    catch (...) {
+        std::cerr << "An exception occurred when attempting to build a board with the current info:" << std::endl;
+        std::cerr << flatboard << std::endl;
+        std::cerr << "Press enter to exit." << std::endl;
+        std::cin.get();
+        exit(2);
+    }
+    return nullptr;
+}
+
+bool Reader::hasNext() {
+    return this->currentLine < this->lines->size();
 }
 
 Board* Reader::nextBoard() {

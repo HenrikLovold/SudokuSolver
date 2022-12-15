@@ -6,17 +6,28 @@
 //
 
 #include <stdio.h>
+#include <iostream>
+#include <string>
 #include "test.hpp"
 #include "reader.hpp"
 #include "board.hpp"
 #include "element.hpp"
 #include "square.hpp"
+#include "solver.hpp"
 
 int test() {
-    Reader r("sudoku_small.txt");
-    Board* b = r.nextBoard();
-    b->printBoard();
-    b->getSquareAt(0, 0)->printInfo();
+    Solver s = Solver("sudoku_100k.txt");
+    unsigned int solveCounter = 0;
+    while (s.hasUnsolvedBoards()) {
+        if (solveCounter == 0) {
+            std::cout << "Starting solving process..." << std::endl;
+        }
+        s.solveNext();
+        solveCounter++;
+        if (solveCounter % 10000 == 0) {
+            std::cout << "Solved: " << solveCounter << std::endl;
+        }
+    }
 
     std::cout << "Program finished, press enter to exit." << std::endl;
     std::cin.get();
