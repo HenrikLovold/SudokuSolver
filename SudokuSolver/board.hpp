@@ -17,6 +17,6 @@ private:
 	Square*** squares;
 	unsigned int boardNumber;
 	unsigned int nSolutionsFound;
-	std::vector<Element>* elements;
+	std::vector<Element*>* elements;
 	void generateElements();
 };

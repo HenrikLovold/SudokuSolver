@@ -18,12 +18,12 @@ class Square {
 public:
     Square(int num);
     ~Square();
-    void addElement(Element e);
+    void addElement(Element* e);
     int getNumber();
     void setNumber(int num);
     bool checkValid(int num);
     void printInfo();
 private:
     int num;
-    std::vector<Element>* elements;
+    std::vector<Element*>* elements;
 };

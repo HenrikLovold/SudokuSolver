@@ -13,14 +13,14 @@
 
 Square::Square(int num) {
     this->num = num;
-    this->elements = new std::vector<Element>();
+    this->elements = new std::vector<Element*>();
 }
 
 Square::~Square() {
     delete this->elements;
 }
 
-void Square::addElement(Element e) {
+void Square::addElement(Element* e) {
     this->elements->push_back(e);
 }
 
@@ -34,7 +34,7 @@ void Square::setNumber(int num) {
 
 bool Square::checkValid(int num) {
     for (int i = 0; i < this->elements->size(); i++) {
-        if (!this->elements->at(i).checkValid(num)) {
+        if (!this->elements->at(i)->checkValid(num)) {
             return false;
         }
     }
@@ -44,5 +44,5 @@ bool Square::checkValid(int num) {
 void Square::printInfo() {
     std::cout << "Square with number: " << this->num << std::endl;
     std::string s;
-    this->elements[0][2].printValues();
+    this->elements[0][2]->printValues();
 }

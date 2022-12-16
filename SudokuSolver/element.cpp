@@ -16,6 +16,7 @@ Element::Element(Square** squares) {
 }
 
 Element::~Element() {
+	delete this->squares;
 }
 
 Square** Element::getSquares()
@@ -40,6 +41,6 @@ bool Element::checkValid(int num) {
 
 void Element::setSquareOwnership() {
 	for (int i = 0; i < 9; i++) {
-		this->squares[i]->addElement(*this);
+		this->squares[i]->addElement(this);
 	}
 }

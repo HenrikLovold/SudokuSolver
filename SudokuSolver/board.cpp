@@ -15,7 +15,7 @@
 Board::Board(Square*** squares, unsigned int boardNumber) {
     this->squares = squares;
     this->boardNumber = boardNumber;
-    this->elements = new std::vector<Element>();
+    this->elements = new std::vector<Element*>();
     this->nSolutionsFound = 0;
     this->generateElements();
 }
@@ -27,7 +27,10 @@ Board::~Board() {
         }
         delete[] this->squares[i];
     }
-    delete this->squares;
+    for (int i = 0; i < this->elements->size(); i++) {
+        delete this->elements->at(i);
+    }
+    delete[] this->squares;
     delete this->elements;
     
 }
@@ -78,23 +81,21 @@ bool Board::hasSolution() {
 }
 
 void Board::generateElements() {
-    Square** currRow = new Square*[9];
-    Square** currCol = new Square*[9];
     unsigned int cnt = 0;
     for (int i = 0; i < 9; i++) {
+        Square** currRow = new Square * [9];
+        Square** currCol = new Square * [9];
         for (int j = 0; j < 9; j++) {
             currRow[cnt] = this->squares[i][j];
             currCol[cnt] = this->squares[j][i];
             cnt++;
         }
-        this->elements->push_back(Element(currRow));
-        this->elements->push_back(Element(currCol));
-        currRow = new Square*[9];
-        currCol = new Square*[9];
+        this->elements->push_back(new Element(currRow));
+        this->elements->push_back(new Element(currCol));
         cnt = 0;
+        //delete currRow;
+        //delete currCol;
     }
-    delete[] currRow;
-    delete[] currCol;
     for (int offsetX = 0; offsetX < 9; offsetX += 3) {
         for (int offsetY = 0; offsetY < 9; offsetY += 3) {
             Square** box = new Square*[9];
@@ -103,7 +104,8 @@ void Board::generateElements() {
                     box[(i*3) + j] = this->squares[i + offsetX][j + offsetY];
                 }
             }
-            this->elements->push_back(Element(box));
+            this->elements->push_back(new Element(box));
+            //delete box;
         }
     }
 

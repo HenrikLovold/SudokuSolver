@@ -16,7 +16,7 @@
 #include "solver.hpp"
 
 int test() {
-    Solver s = Solver("sudoku_100k.txt");
+    Solver s = Solver("sudoku.txt");
     unsigned int solveCounter = 0;
     while (s.hasUnsolvedBoards()) {
         if (solveCounter == 0) {
