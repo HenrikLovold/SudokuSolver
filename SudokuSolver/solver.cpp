@@ -5,10 +5,11 @@
 //  Created by Henrik Hillestad Løvold on 11/12/2022.
 //
 
-#include "solver.hpp"
 #include <string>
 #include <vector>
+#include <thread>
 #include "reader.hpp"
+#include "solver.hpp"
 
 Solver::Solver(std::string filename) {
 	this->reader = new Reader(filename);
@@ -21,10 +22,26 @@ Solver::~Solver() {
 	delete this->boards;
 }
 
-void Solver::solveNext() {
-	Board* currentBoard = this->reader->nextBoard();
-	currentBoard->solve(0);
-	delete currentBoard;
+void Solver::solveThreadMain() {
+	while (this->reader->hasNext() && this->currentBoardNumber < 10000000) {
+		Board* solveBoard = this->reader->nextBoard();
+		solveBoard->solve(0);
+		this->currentBoardNumber++;
+		if (this->currentBoardNumber % 10000 == 0) {
+			std::cout << "Solved #" << this->currentBoardNumber << std::endl;
+		}
+		delete solveBoard;
+	}
+}
+
+void Solver::solveAll() {
+	std::vector<std::thread> threads;
+	for (uint i = 0; i < 16; i++) {
+		threads.push_back(std::thread([this] { this->solveThreadMain(); }));
+	}
+	for (uint i = 0; i < 16; i++) {
+		threads[i].join();
+	}
 }
 
 bool Solver::hasUnsolvedBoards() {
