@@ -16,8 +16,9 @@
 #include "square.hpp"
 #include "solver.hpp"
 
-int test() {
-    Solver s = Solver("sudoku.txt");
+int test(uint nThreads) {
+    std::cout << "Starting sudoku solver with nThreads = " << nThreads << std::endl;
+    Solver s = Solver("sudoku.txt", nThreads);
     unsigned int solveCounter = 0;
     time_t start = time(NULL); 
     s.solveAll();

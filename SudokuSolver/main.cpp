@@ -9,6 +9,10 @@
 #include "test.hpp"
 
 int main(int argc, const char * argv[]) {
-    test();
+    uint nThreads = 1;
+    if (argc > 1) {
+        nThreads = (uint)atoi(argv[1]);
+    }
+    test(nThreads);
     return 0;
 }

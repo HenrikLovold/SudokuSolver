@@ -11,11 +11,13 @@
 #include "reader.hpp"
 #include "solver.hpp"
 
-Solver::Solver(std::string filename) {
+Solver::Solver(std::string filename, uint nThreads) {
 	this->reader = new Reader(filename);
 	this->boards = new std::vector<Board*>();
 	this->solved = new std::vector<Board*>();
 	this->currentBoardNumber = 0;
+	this->nLines = this->reader->getNLines();
+	this->nThreads = nThreads;
 }
 
 Solver::~Solver() {
@@ -23,7 +25,7 @@ Solver::~Solver() {
 }
 
 void Solver::solveThreadMain() {
-	while (this->reader->hasNext() && this->currentBoardNumber < 10000000) {
+	while (this->currentBoardNumber < this->nLines) {
 		Board* solveBoard = this->reader->nextBoard();
 		solveBoard->solve(0);
 		this->currentBoardNumber++;
@@ -36,10 +38,10 @@ void Solver::solveThreadMain() {
 
 void Solver::solveAll() {
 	std::vector<std::thread> threads;
-	for (uint i = 0; i < 16; i++) {
+	for (uint i = 0; i < this->nThreads; i++) {
 		threads.push_back(std::thread([this] { this->solveThreadMain(); }));
 	}
-	for (uint i = 0; i < 16; i++) {
+	for (uint i = 0; i < this->nThreads; i++) {
 		threads[i].join();
 	}
 }

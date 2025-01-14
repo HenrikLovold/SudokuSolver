@@ -15,7 +15,7 @@
 
 class Solver {
 public:
-    Solver(std::string filename);
+    Solver(std::string filename, uint nThreads);
     ~Solver();
     void solveAll();
     bool hasUnsolvedBoards();
@@ -24,7 +24,8 @@ private:
     Reader* reader;
     std::vector<Board*>* boards;
     std::vector<Board*>* solved;
-    int currentBoardNumber;
-    
+    uint currentBoardNumber;
+    uint nThreads;
+    uint nLines;
     void loadBoards();
 };

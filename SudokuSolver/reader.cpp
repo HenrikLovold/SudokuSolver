@@ -64,6 +64,10 @@ Board* Reader::buildBoard(std::string flatboard) {
     return nullptr;
 }
 
+int Reader::getNLines() {
+    return this->lines->size();
+}
+
 bool Reader::hasNext() {
     return this->currentLine < this->lines->size();
 }

@@ -21,6 +21,7 @@ public:
     ~Reader();
     Board* nextBoard();
     bool hasNext();
+    int getNLines();
 private:
     int currentLine = 0;
     std::string filename;
