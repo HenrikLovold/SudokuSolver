@@ -25,7 +25,7 @@ Solver::~Solver() {
 }
 
 void Solver::solveThreadMain() {
-	while (this->reader->hasNext && this->currentBoardNumber < this->nLines) {
+	while (this->reader->hasNext() && this->currentBoardNumber < this->nLines) {
 		Board* solveBoard = this->reader->nextBoard();
 		solveBoard->solve(0);
 		this->currentBoardNumber++;
